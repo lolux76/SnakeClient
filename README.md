@@ -1,0 +1,2 @@
+# SnakeClient
+Snake Client application
