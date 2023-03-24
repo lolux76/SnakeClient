@@ -18,6 +18,7 @@ public class ViewLobby {
     private JButton connectButton;
     private Connection connection;
     private String username;
+    private String token;
 
     public ViewLobby() {
         JFrame jframe = new JFrame("Snake Lobby");
@@ -73,7 +74,7 @@ public class ViewLobby {
                 if(isConnected) {
                     String message = chatField.getText();
                     message = username + ": " + message;
-                    connection.sendMessage(message);
+                    connection.sendMessage(message, token);
                     addChatMessage(message);
                     chatField.setText("");
                 }
@@ -112,25 +113,3 @@ public class ViewLobby {
         ViewLobby lobby = new ViewLobby();
     }
 }
-
-19h00->19h15 x3 x4
-19h20->19h35 x3 x4
-19h40->19h55 x3 x4
-20h00->20h15 x3 x4
-
-48 joueurs
-
-24 6 matchs
-
-20h45-> 21h00 x3
-21h10 -> 21h25 x3
-
-        12 joueurs
-
-21h35->21h50 x3
-
-        3 -> en finale
-        3 -> en demi-finale
-
-22h00->22h15
-22h30->22h45

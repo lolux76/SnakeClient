@@ -1,5 +1,6 @@
 package connection;
 
+import org.json.JSONStringer;
 import view.ViewLobby;
 
 import java.io.PrintWriter;
@@ -20,8 +21,8 @@ public class Connection {
 
             cout.println(reply + ": has joined the game.");
             String message = (name + " : ");
-            if (reply.equals("logout")) {
-                cout.println("logout");
+            if (reply.equals("/logout")) {
+                cout.println("/logout");
             }
             cout.println(message + reply);
             lobby.setConnected();
@@ -30,7 +31,13 @@ public class Connection {
         }
     }
 
-    public void sendMessage(String message){
-        this.cout.println(message);
+    public void sendMessage(String message, String token){
+        JSONStringer json = new JSONStringer();
+        json.object();
+        json.key("token").value(token);
+        json.key("message").value(message);
+        json.endObject();
+
+        this.cout.println(json.toString());
     }
 }

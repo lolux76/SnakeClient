@@ -1,5 +1,6 @@
 package connection;
 
+import org.json.JSONObject;
 import view.ViewLobby;
 
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ public class ClientThread implements Runnable{
     private Socket socket;
     private BufferedReader cin;
     private ViewLobby lobby;
+    private String token;
 
     public ClientThread(Socket socket, ViewLobby lobby) throws IOException {
         this.socket = socket;
@@ -24,6 +26,10 @@ public class ClientThread implements Runnable{
         try {
             while (true) {
                 String message = cin.readLine();
+                JSONObject json = new JSONObject(message);
+                if(this.token == null){
+                    this.token = json.getString("token");
+                }
                 lobby.addChatMessage(message);
             }
         } catch (SocketException e) {
