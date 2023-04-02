@@ -96,7 +96,6 @@ public class ViewLobby {
             this.username = usernameField.getText();
             String ipAddress = ipAddressField.getText();
             int port = Integer.parseInt(portField.getText());
-
             this.connection = new Connection(ipAddress, port, username, this);
         }
     }

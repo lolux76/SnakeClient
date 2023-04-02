@@ -1,5 +1,7 @@
 package connection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONStringer;
 import view.ViewLobby;
 
@@ -11,20 +13,19 @@ public class Connection {
     private PrintWriter cout;
     private Socket socket;
     public Connection(String serverAddress, int port, String name, ViewLobby lobby) {
-        String reply = "";
+        String reply = name;
         try {
             socket = new Socket(serverAddress, port);
             this.cout = new PrintWriter(socket.getOutputStream(), true);
 
             ClientThread clientThread = new ClientThread(socket, lobby);
             new Thread(clientThread).start(); // start thread to receive message
-
             cout.println(reply + ": has joined the game.");
             String message = (name + " : ");
             if (reply.equals("/logout")) {
                 cout.println("/logout");
             }
-            cout.println(message + reply);
+            /*cout.println(message + reply);*/
             lobby.setConnected();
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -32,12 +33,6 @@ public class Connection {
     }
 
     public void sendMessage(String message, String token){
-        JSONStringer json = new JSONStringer();
-        json.object();
-        json.key("token").value(token);
-        json.key("message").value(message);
-        json.endObject();
-
-        this.cout.println(json.toString());
+		this.cout.println(message);
     }
 }
