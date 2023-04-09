@@ -28,7 +28,6 @@ public class ClientThread implements Runnable{
         this.cin = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.lobby = lobby;
     }
-
     @Override
     public void run() {
         try {
