@@ -16,6 +16,7 @@ import controller.ControllerSnakeGame;
 import item.Item;
 import model.SnakeGame;
 import model.Game;
+import strategy.AgentInput;
 import utils.AgentAction;
 import utils.ColorSnake;
 import utils.FeaturesItem;
@@ -58,6 +59,8 @@ public class ViewSnakeGame implements Observer{
 		this.panelBomberman = panelBomberman;
 		
 		jFrame.add("Center",panelBomberman);
+
+		jFrame.addKeyListener(AgentInput.getUserInput());
 
 
 	
