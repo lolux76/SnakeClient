@@ -16,6 +16,7 @@ import controller.ControllerSnakeGame;
 import item.Item;
 import model.SnakeGame;
 import model.Game;
+import model.Infos;
 import strategy.AgentInput;
 import utils.AgentAction;
 import utils.ColorSnake;
@@ -31,8 +32,6 @@ public class ViewSnakeGame implements Observer{
 	PanelSnakeGame panelBomberman;
 
 	public ViewSnakeGame(ControllerSnakeGame controller, Observable obs, PanelSnakeGame panelBomberman) {
-
-		obs.addObserver(this);
 
 
 		jFrame= new MainFrame(controller);
@@ -61,8 +60,6 @@ public class ViewSnakeGame implements Observer{
 		jFrame.add("Center",panelBomberman);
 
 		jFrame.addKeyListener(AgentInput.getUserInput());
-
-
 	
 
 		jFrame.setVisible(true);
@@ -74,14 +71,12 @@ public class ViewSnakeGame implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-
-		SnakeGame snakeGame = (SnakeGame)o;
-
-
+		
+		Infos infos = (Infos) arg;
 		
 		ArrayList<FeaturesSnake>  featuresSnakes = new ArrayList<FeaturesSnake>();
 	
-		for(Snake snake : snakeGame.getSnakes()) {	
+		for(Snake snake : infos.getSnakes()) {	
 			
 			boolean isInvincible;
 			if(snake.getInvincibleTimer() > 0) {
@@ -102,7 +97,7 @@ public class ViewSnakeGame implements Observer{
 		
 		ArrayList<FeaturesItem> featuresItem = new ArrayList<FeaturesItem>();
 		
-		for(Item item : snakeGame.getItems()) {		
+		for(Item item : infos.getItems()) {		
 			featuresItem.add(new FeaturesItem(item.getX(), item.getY(), item.getItemType()));
 		}
 

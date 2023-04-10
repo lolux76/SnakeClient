@@ -6,11 +6,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Observable;
 
+import javax.swing.JFrame;
+
 public class AgentInput extends Observable implements KeyListener{
 
     private static AgentInput instance;
     private AgentAction lastAction;
-
+    private JFrame jframe;
+    
     private AgentInput(){
         lastAction = AgentAction.MOVE_LEFT;
     }
@@ -44,7 +47,6 @@ public class AgentInput extends Observable implements KeyListener{
         } else if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
             lastAction = AgentAction.MOVE_DOWN;
         }
-
         setChanged();
         notifyObservers(lastAction);
     }

@@ -38,11 +38,11 @@ public class Snake implements Serializable{
 
 
 
-	public Snake(Position position, AgentAction lastMove,  int id, ColorSnake colorSnake) {
+	public Snake(ArrayList<Position> position, AgentAction lastMove,  int id, ColorSnake colorSnake) {
 
 		this.positions = new ArrayList<Position>();
 		
-		this.positions.add(position);
+		this.positions= position;
 		
 		
 		this.setId(id);

@@ -1,10 +1,12 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import agent.Snake;
 import item.Item;
 import model.SnakeGame;
+import strategy.AgentInput;
 import model.InputMap;
 import utils.AgentAction;
 import view.PanelSnakeGame;
@@ -17,7 +19,7 @@ public class ControllerSnakeGame extends AbstractController {
 
 	
 
-	
+	private ViewSnakeGame viewSnakeGame;
 	
 	public ControllerSnakeGame(SnakeGame snakeGame) {
 		
@@ -27,7 +29,7 @@ public class ControllerSnakeGame extends AbstractController {
 	public ControllerSnakeGame() {
 		
 
-		String layoutName = "layouts/smallArena.lay";
+		String layoutName = "layouts/alone/smallNoWall_alone.lay";
 		
 		
 		InputMap inputMap = null;
@@ -41,38 +43,16 @@ public class ControllerSnakeGame extends AbstractController {
 		
 
 		
-		this.game = new SnakeGame(10000, inputMap, false);
-		this.game.init();
-
-
-		
 		PanelSnakeGame panelSnakeGame = new PanelSnakeGame(inputMap.getSizeX(), inputMap.getSizeY(), inputMap.get_walls(), inputMap.getStart_snakes(), inputMap.getStart_items());
 		
 		
-		ViewSnakeGame viewSnakeGame = new ViewSnakeGame(this, this.game, panelSnakeGame);
-		
-		ViewCommand viewCommand = new ViewCommand(this, this.game);
+		viewSnakeGame = new ViewSnakeGame(this, AgentInput.getUserInput(), panelSnakeGame);
 		
 		
 	}
 	
-
-	public void goUp(){
-        ((SnakeGame)this.game).setInputMoveHuman1(AgentAction.MOVE_UP);
+	public ViewSnakeGame getView() {
+		return viewSnakeGame;
 	}
-	
-	public void goDown(){
-		((SnakeGame)this.game).setInputMoveHuman1(AgentAction.MOVE_DOWN);
-	}	
-	
-	public void goLeft(){
-		((SnakeGame)this.game).setInputMoveHuman1(AgentAction.MOVE_LEFT);
-	}	
-	
-	public void goRight(){
-		((SnakeGame)this.game).setInputMoveHuman1(AgentAction.MOVE_RIGHT);
-	}	
-
-
 
 }
